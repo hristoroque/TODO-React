@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+#root{
+  width: 100%;
+}
+
 .app{
   width: 100%;
   display: flex;
@@ -77,4 +81,16 @@ html{
   margin: 5px;
   background-color: red;
   border-radius: 50%;
+}
+
+.content{
+  display: flex;
+}
+
+.list-view{
+  width: 70%;
+}
+
+.list-detail{
+  width: 30%;
 }
