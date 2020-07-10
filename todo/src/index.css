@@ -24,21 +24,21 @@ html{
   margin: 10px;
 }
 
-.form-control{
-  padding: 5px;
-  border-radius: 5px;
+.form-control[type=text]{
+  border: none;
+  border-bottom: 3px solid black;
+  width: 70%;
 }
 
 .btn{
-  background-color: #111D4A;
-  color: white;
+  border: 3px solid black;
+  color: black;
   padding: 5px;
-  border-width: 0px;
   border-radius: 5px;
 }
 
 .btn:hover{
-  background-color: #8380B6;
+  background-color: gray;
 }
 
 .todo-list{
@@ -83,14 +83,11 @@ html{
   border-radius: 50%;
 }
 
-.content{
-  display: flex;
-}
-
 .list-view{
   width: 70%;
 }
 
-.list-detail{
+.detail-view{
   width: 30%;
+  border-left: 1px solid black;
 }

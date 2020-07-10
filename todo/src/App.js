@@ -1,18 +1,19 @@
 import React from 'react';
+import Header from './Header';
 
 function Todo(props){
   let poms_list = Array(4).fill(0)
 
   return (
-    <div className="todo" onClick={props.selectTodoHandler}>
-      <div className="todo-task">
+    <div className="todo">
+      <div className="todo-task" onClick={props.selectTodoHandler}>
         <div className="todo-text">
           {props.name}
         </div>
       </div>
       <div className="todo-detalles">
         <div className="todo-time">
-          {poms_list.map((pom)=><div className="pomodoro"></div>)}
+          {poms_list.map((pom,i)=><div key={i} className="pomodoro"></div>)}
         </div>
         <button className="btn todo-acciones" onClick={props.onDelete}>
           X
@@ -40,8 +41,8 @@ a todoTextChangeHandler
 function TodoCreationForm(props){
   return (
     <form onSubmit={props.todoCreationHandler} >
-      <input type='text' value={props.taskInputText} onChange={props.todoTextChangeHandler} />
-      <input type='submit' value='Create' />
+      <input className="form-control" type='text' value={props.taskInputText} onChange={props.todoTextChangeHandler} />
+      <input className="btn" type='submit' value='Create' />
     </form>
   )
 }
@@ -58,7 +59,7 @@ function TodoDetailView(props){
 
   let view
 
-  if(props.currentTask === null){
+  if(props.currentTask == null){
     view = (
       <div>
         Selecciona una Tarea para ver el detalle
@@ -104,6 +105,13 @@ class App extends React.Component {
 
   render() {
     return (
+      <div>
+      <Header
+        date={new Date()}
+        currentTime={this.state.currentTime}
+        plannedTime={this.state.plannedTime}
+      />
+      <hr/>
       <div className='content'>
         <div className="list-view">
           <TodoCreationForm
@@ -115,9 +123,10 @@ class App extends React.Component {
         </div>
         <div className='detail-view'>
             <TodoDetailView 
-              currentTask={this.state.currentTask}
+              currentTask={this.state.currentTask }
             />
         </div>
+      </div>
       </div>
     )
   }
@@ -133,7 +142,8 @@ class App extends React.Component {
     if(tasks.length===0){
       this.setState({currentTask: null})
     } else {
-      this.setState({currentTask: tasks[0]})
+      const task = tasks[0]
+      this.setState({currentTask: {pk: task.pk, name: task.name, pomodoros: task.pomodoros}})
     }
   }
   

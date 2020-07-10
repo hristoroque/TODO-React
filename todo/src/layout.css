@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Indie+Flower&display=swap');
+
+#root{
+    padding: 50px;
+}
+
+* {
+    font-family: 'Indie Flower', cursive;;
+    font-size: 24px;
+}
+
+header {
+    width: 100%;
+}
+
+header > h1 {
+    font-size: 52px;
+    font-family: 'Bangers', cursive;
+}
+
+.content{
+    display: flex;
+    padding: 20px;
+}
