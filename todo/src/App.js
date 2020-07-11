@@ -1,35 +1,7 @@
 import React from 'react';
 import Header from './Header';
-
-function Todo(props){
-  let poms_list = Array(4).fill(0)
-
-  return (
-    <div className="todo">
-      <div className="todo-task" onClick={props.selectTodoHandler}>
-        <div className="todo-text">
-          {props.name}
-        </div>
-      </div>
-      <div className="todo-detalles">
-        <div className="todo-time">
-          {poms_list.map((pom,i)=><div key={i} className="pomodoro"></div>)}
-        </div>
-        <button className="btn todo-acciones" onClick={props.onDelete}>
-          X
-        </button>
-      </div>
-    </div>
-  )
-}
-
-function TodoList(props){
-  return (
-    <div className="todo-list">
-      { props.todos.map((todo)=><Todo key={todo.pk} name={todo.name} pomodoros={todo.pomodoros} onDelete={()=>props.onDelete(todo.pk)} selectTodoHandler={()=>props.selectTodoHandler(todo.pk)} />) }
-    </div>
-  )
-}
+import TodoList from './TodoList';
+import TodoDetail from './TodoDetail'
 
 /*
 CreationForm component
@@ -55,33 +27,6 @@ a todoUpdateHandler
 a todoDeleteHandler
 */
 
-function TodoDetailView(props){
-
-  let view
-
-  if(props.currentTask == null){
-    view = (
-      <div>
-        Selecciona una Tarea para ver el detalle
-      </div>
-    )
-  } else {
-    view = (
-      <div>
-        <h2>{props.currentTask.name}</h2>
-        <button>
-          Editar
-        </button>
-        <button>
-          Eliminar
-        </button>
-      </div>
-    )
-  }
-
-  return view
-}
-
 class App extends React.Component {
 
   constructor(props){
@@ -101,6 +46,7 @@ class App extends React.Component {
     this.updateTodoText = this.updateTodoText.bind(this)
     this.createTodo = this.createTodo.bind(this)
     this.deleteTodo = this.deleteTodo.bind(this)
+    this.editTodo = this.editTodo.bind(this)
   }
 
   render() {
@@ -119,11 +65,17 @@ class App extends React.Component {
             todoCreationHandler={this.createTodo}
             todoTextChangeHandler={this.updateTodoText}
           />
-          <TodoList todos={ this.state.tasks } onDelete={ this.deleteTodo } selectTodoHandler={ this.selectTodoTask } />
+          <TodoList 
+            todos={ this.state.tasks } 
+            onDelete={ this.deleteTodo }
+            selectTodoHandler={ this.selectTodoTask } 
+            />
         </div>
         <div className='detail-view'>
-            <TodoDetailView 
-              currentTask={this.state.currentTask }
+            <TodoDetail 
+              currentTask={ this.state.currentTask }
+              onEdit={ this.editTodo }
+              onDelete={ this.deleteTodo }
             />
         </div>
       </div>
@@ -166,6 +118,14 @@ class App extends React.Component {
     if(this.state.currentTask!==null && this.state.currentTask.pk === pk){
       this.setState({currentTask: null})
     }
+    this.setState({tasks})
+  }
+  editTodo(editedTask){
+    const tasks = this.state.tasks.map(task => {
+      if(task.pk === editedTask.pk){
+        return {pk: editedTask.pk,name: editedTask.name, pomodoros: editedTask.pomodoros}
+      } return task
+    })
     this.setState({tasks})
   }
 }
