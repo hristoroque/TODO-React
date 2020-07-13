@@ -2,7 +2,6 @@ import React from 'react';
 import Header from './Header';
 import TodoList from './TodoList';
 import TodoDetail from './TodoDetail'
-
 /*
 CreationForm component
 it receives:
@@ -40,6 +39,7 @@ class App extends React.Component {
       tasks: [],
       taskInputText: '',
       currentTime: 25,
+      interval: null,
     }
 
     this.selectTodoTask = this.selectTodoTask.bind(this)
@@ -47,6 +47,7 @@ class App extends React.Component {
     this.createTodo = this.createTodo.bind(this)
     this.deleteTodo = this.deleteTodo.bind(this)
     this.editTodo = this.editTodo.bind(this)
+    this.startTime = this.startTime.bind(this)
   }
 
   render() {
@@ -76,6 +77,8 @@ class App extends React.Component {
               currentTask={ this.state.currentTask }
               onEdit={ this.editTodo }
               onDelete={ this.deleteTodo }
+              onStartTime={ this.startTime }
+              time={this.state.currentTime}
             />
         </div>
       </div>
@@ -127,6 +130,24 @@ class App extends React.Component {
       } return task
     })
     this.setState({tasks})
+  }
+  startTime(){ 
+    let interval = setInterval(()=>{
+      if(this.state.currentTime <= 0){
+        this.setState({currentTime: 25})
+        this.stopTime()
+      }
+      else {
+        this.setState((prevState) =>
+        ({currentTime: prevState.currentTime-1})
+        )
+      }
+    },1000)
+    this.setState({interval})
+  }
+  stopTime(){
+    clearInterval(this.state.interval)
+    this.setState({interval: null})
   }
 }
 

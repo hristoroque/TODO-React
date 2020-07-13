@@ -1,4 +1,5 @@
 import React from 'react'
+import Pomodoro from './Pomodoro'
 
 function TodoDetail(props){
   let view
@@ -18,6 +19,10 @@ function TodoDetail(props){
         <button onClick={()=> props.onDelete(props.currentTask.pk)}>
           Eliminar
         </button>
+        <button onClick={props.onStartTime}>
+          startTime
+        </button>
+        <Pomodoro time={props.time}/>
       </div>
     )
   }
