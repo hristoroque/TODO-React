@@ -35,9 +35,6 @@ function Todo(props) {
                         <div key={i} className="pomodoro"></div>
                     )}
                 </div>
-                <button className="btn todo-acciones" onClick={props.onDelete}>
-                    X
-                </button>
             </div>
         </div>
     )

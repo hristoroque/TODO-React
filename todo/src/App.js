@@ -11,7 +11,7 @@ a todoTextChangeHandler
 */
 function TodoCreationForm(props){
   return (
-    <form onSubmit={props.todoCreationHandler} >
+    <form onSubmit={props.todoCreationHandler} className="form">
       <input className="form-control" type='text' value={props.taskInputText} onChange={props.todoTextChangeHandler} />
       <input className="btn" type='submit' value='Create' />
     </form>
