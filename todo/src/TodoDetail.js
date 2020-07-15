@@ -13,16 +13,19 @@ function TodoDetail(props){
     view = (
       <div>
         <h2>{props.currentTask.name}</h2>
-        <button onClick={()=> props.onEdit({pk: props.currentTask.pk, name: 'Hristo', pomodoros: 1})}>
+        <button className="btn" onClick={()=> props.onEdit({pk: props.currentTask.pk, name: 'Hristo', pomodoros: 1})}>
           Editar
         </button>
-        <button onClick={()=> props.onDelete(props.currentTask.pk)}>
+        <button className="btn" onClick={()=> props.onDelete(props.currentTask.pk)}>
           Eliminar
         </button>
-        <button onClick={props.onStartTime}>
-          startTime
-        </button>
-        <Pomodoro time={props.time}/>
+        <hr></hr>
+        <div className="divClock">
+          <button className="btn" onClick={props.onStartTime}>
+            startTime
+          </button>
+          <Pomodoro time={props.time}/>
+        </div>
       </div>
     )
   }

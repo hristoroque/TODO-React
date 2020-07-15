@@ -27,3 +27,21 @@ header > h1 {
 .form {
     display: flex;
 }
+
+.clock{
+    background-color: #242424;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.divClock{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
